@@ -1,0 +1,26 @@
+
+// Fonts
+
+// Variables
+@import "variables";
+@import "font-awesome/font-awesome";
+
+// Bootstrap
+// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+@import "node_modules/bulma/bulma";
+
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-active {
+  padding-left: 10px;
+  opacity: 0;
+}
+.swal2-modal hr {
+    background-color: transparent;}
