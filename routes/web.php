@@ -10,11 +10,16 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+use App\Mail\ConfirmMail;
+Route::get('/home', function () {
 
-Route::get('/dashboard', function () {
-    return view('welcome');
+    return view('home');
 });
+
 Route::get('/', function () {
+  // $user = App\User::find(7);
+  //
+  // Mail::to($user)->send(new ConfirmMail());
     return view('welcome');
 });
 

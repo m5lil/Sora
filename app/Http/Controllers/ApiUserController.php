@@ -5,18 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
-use App\Permission;
+use App\Role;
 use App\Http\Requests;
 
 class ApiUserController extends Controller
 {
      public function index()
     {
-        $permissions = Permission::select('id','name')->get();
+        $roles = Role::select('id','name')->get();
         $data = User::paginate(20);
         return response()->json([
             'data' => $data,
-            'permissions' => $permissions
+            'roles' => $roles
         ]);
         // $items = User::latest()->paginate(20);
         // $response = [
@@ -55,6 +55,8 @@ class ApiUserController extends Controller
     }
     public function destroy($id)
     {
-        return User::destroy($id);
+        $ids = explode(",",$id);
+        // dd($ids);
+        return User::destroy($ids);
     }
 }

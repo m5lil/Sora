@@ -32,6 +32,8 @@ const Foo = { template: '<div>Foo</div>' }
 const Bar = { template: '<div>Bar</div>' }
 import User from './components/User.vue'
 import Role from './components/Role.vue'
+import Menu from './components/Menu.vue'
+import Page from './components/Page.vue'
 //
 
 
@@ -44,6 +46,8 @@ const router = new VueRouter({
     { path: '/', component: Home },
     { path: '/foo', component: Foo },
     { path: '/bar', component: Bar },
+    { path: '/menus', component: Menu },
+    { path: '/pages', component: Page },
     { path: '/users', component: User }, // example of route with a seperate component
     { path: '/roles', component: Role } // example of route with a seperate component
   ]

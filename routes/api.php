@@ -25,3 +25,5 @@ Route::get('/user', function (Request $request) {
 Route::resource('users', 'ApiUserController');
 Route::resource('roles', 'RolesController');
 Route::resource('permissions', 'PermissionController');
+Route::resource('menus', 'MenuController');
+Route::resource('pages', 'PageController');
