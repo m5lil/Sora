@@ -40,7 +40,14 @@ class ApiUserController extends Controller
     }
     public function show($id)
     {
-        return User::findOrFail($id);
+        $data = User::findOrFail($id);
+        $avatar = 'http://www.gravatar.com/avatar/' . md5($data->email) . '?s=32';
+        return response()->json([
+            'data' => $data,
+            'avatar' => $avatar
+        ]);
+
+
     }
     public function update(Request $request, $id)
     {

@@ -34,6 +34,7 @@ import User from './components/User.vue'
 import Role from './components/Role.vue'
 import Menu from './components/Menu.vue'
 import Page from './components/Page.vue'
+import Blog from './components/Blog.vue'
 //
 
 
@@ -46,6 +47,7 @@ const router = new VueRouter({
     { path: '/', component: Home },
     { path: '/foo', component: Foo },
     { path: '/bar', component: Bar },
+    { path: '/blogs', component: Blog },
     { path: '/menus', component: Menu },
     { path: '/pages', component: Page },
     { path: '/users', component: User }, // example of route with a seperate component

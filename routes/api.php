@@ -27,3 +27,6 @@ Route::resource('roles', 'RolesController');
 Route::resource('permissions', 'PermissionController');
 Route::resource('menus', 'MenuController');
 Route::resource('pages', 'PageController');
+Route::resource('posts', 'PostController');
+Route::resource('categories', 'CategoryController');
+Route::resource('comments', 'CommentController');

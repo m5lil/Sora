@@ -7,17 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
 
-  protected $dates = ['publish_at'];
+  // protected $dates = ['publish_at'];
 
-
-      protected $sortable = [
-          'id',
-          'category_id',
-          'title',
-          'status',
-          'created_at',
-          'publish_at',
-      ];
+  protected $fillable = [
+      'title',
+      'content',
+      'category_id',
+      'status',
+      'seo_title',
+      'seo_description'
+  ];
 
       public function category()
       {

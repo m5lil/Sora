@@ -66,7 +66,11 @@
 </div>
 @endsection
 
-
+<style media="screen">
+  #bottomContainer{
+    display: none;
+  }
+</style>
 
 @push('scripts')
   {{-- / setting value to your CSRFglobal variables  --}}
@@ -75,8 +79,7 @@
     'csrfToken' => csrf_token(),
   ]); ?>
   </script>
-
+  <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
   <script src="{{ elixir('js/app.js') }}"></script>
   <script src="{{ elixir('js/all.js') }}"></script>
-
 @endpush

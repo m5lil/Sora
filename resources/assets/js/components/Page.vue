@@ -36,7 +36,7 @@
               <input v-model="newPage.title" class="input" type="title" placeholder="Title">
             </p>
             <p class="control is-expanded">
-              <input v-model="newPage.content"  class="input" type="content" placeholder="Content">
+              <textarea v-model="newPage.content" id="tinymce" v-html="newPage.content" class="input"></textarea>
             </p>
             <p class="control is-expanded">
               <input v-model="newPage.status"  class="input" type="status" placeholder="Status">
@@ -76,7 +76,7 @@
           <th>{{page.id}}</span></th>
           <th>{{page.title}}</th>
           <th>{{page.seo_title}}</th>
-          <th>{{page.content.substring(0,10)}}...</th>
+          <th v-html="page.content.substring(0,60)"></th>
           <th>{{page.status}}</th>
           <th>
             <button class="button is-small is-primary" @click="ShowPage(page.id)">
@@ -106,6 +106,13 @@ export default {
   },
   mounted() {
     console.log('Page Component ready.')
+    tinymce.init({
+      selector:'textarea',
+      height: 300,
+      theme: 'modern',
+      plugins : ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste"],
+      toolbar : "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist | link image fullscreen"
+     })
     this.fetchPage()
   },
 
@@ -179,6 +186,7 @@ export default {
         this.newPage.id = data.data.id
         this.newPage.title = data.data.title
         this.newPage.content = data.data.content
+        tinymce.get("tinymce").setContent(this.newPage.content);
         this.newPage.status = data.data.status
         this.newPage.seo_title = data.data.seo_title
         this.newPage.seo_description = data.data.seo_description
@@ -189,10 +197,12 @@ export default {
 
     EditPage: function(){
       var page = this.newPage
+      page.content = tinymce.get('tinymce').getContent()
       var id = page.id
       this.$http.patch('/api/pages/' + id, page).then((data) => {
         this.newPage = { title:'', content:'', status:'', seo_title:'', seo_description:''}
         this.form = false
+        tinymce.get("tinymce").setContent('')
         swal({
           title: 'Good job!',
           text: 'You clicked the button!',
@@ -208,11 +218,12 @@ export default {
     AddNewPage: function(){
       // page input
       var page = this.newPage
-
+      page.content = tinymce.get('tinymce').getContent()
       // send post
       this.$http.post('/api/pages/', page).then((data) => {
         this.newPage = { title:'', content:'', status:'', seo_title:'', seo_description:''}
         this.form = false
+        tinymce.get("tinymce").setContent('')
         swal({
           title: 'Good job!',
           text: 'You clicked the button!',
@@ -228,6 +239,7 @@ export default {
     closeForm: function () {
       this.form = false
       this.newPage = { title:'', content:'', status:'', seo_title:'', seo_description:''}
+      tinymce.get("tinymce").setContent('');
     },
 
     openForm: function () {

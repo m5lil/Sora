@@ -31,12 +31,14 @@
         <section class="modal-card-body">
 
           <form id="form" action="#" @submit.prevent="" method="POST">
-
+            <div class="control is-grouped">
+            <img v-if="edit" v-bind:src="avatar" alt="" />
             <p class="control has-icon is-expanded">
               <input v-model="newUser.name" class="input" v-bind:class="{ 'is-danger': !validation.name }" type="name" placeholder="Name">
               <i class="fa fa-user"></i>
               <span v-show="!validation.name" class="help is-danger">Type Correct name</span>
             </p>
+          </div>
             <div class="control is-grouped">
               <p class="control has-icon is-expanded">
                 <input v-model="newUser.email"  class="input" v-bind:class="{ 'is-danger': !validation.email }" type="email" placeholder="Email">
@@ -158,6 +160,7 @@ export default {
         rpassword: '',
       },
       roles: [],
+      avatar:'',
       searchKey: '',
       current_page : 0,
       last_page : 0,
@@ -270,12 +273,13 @@ export default {
     ShowUser: function (id) {
       this.edit = true
       this.$http.get('/api/users/' + id).then((data) => {
-        this.newUser.id = data.data.id
-        this.newUser.name = data.data.name
-        this.newUser.email = data.data.email
-        this.newUser.admin = data.data.admin
-        this.newUser.password = data.data.password
-        this.newUser.rpassword = data.data.password
+        this.newUser.id = data.data.data.id
+        this.newUser.name = data.data.data.name
+        this.newUser.email = data.data.data.email
+        this.newUser.admin = data.data.data.admin
+        this.newUser.password = data.data.data.password
+        this.newUser.rpassword = data.data.data.password
+        this.avatar = data.data.avatar
         document.forms[0].elements[0].focus();
         this.form = true
       })
@@ -323,6 +327,7 @@ export default {
     closeForm: function () {
       this.form = false
       this.newUser = { name:'', email:'', password:'',admin:''}
+      this.edit = false
     },
     openForm: function () {
       this.form = true

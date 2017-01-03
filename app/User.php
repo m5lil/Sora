@@ -11,7 +11,7 @@ class User extends Authenticatable
     use EntrustUserTrait;
     /**
      * The attributes that are mass assignable.
-     *
+     * 
      * @var array
      */
     protected $fillable = [
